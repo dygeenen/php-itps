@@ -13,10 +13,9 @@ USER 0
 
 # Install MSSQL
 RUN INSTALL_PREREQUIS_MSSQL="gcc-c++ gcc rh-php73-php-devel rh-php73-php-pear yum-utils" && \
-    yum install -y --setopt=tsflags=nodocs $INSTALL_PREREQUIS_MSSQL --nogpgcheck && \
-    rpm -V $INSTALL_PREREQUIS_MSSQL && \
-    yum -y clean all --enablerepo='*' && \
-    curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos.d/mssql-release.repo && \
+    yum install -y --setopt=tsflags=nodocs $INSTALL_PREREQUIS_MSSQL --nogpgcheck
+
+RUN curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos.d/mssql-release.repo && \
     yum -y remove unixODBC-utf16 unixODBC-utf16-devel && \
     yum -y install unixODBC-devel && \
     ACCEPT_EULA=Y yum -y install msodbcsql17 && \
