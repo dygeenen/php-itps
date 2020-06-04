@@ -26,5 +26,9 @@ RUN curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos
     echo extension=pdo_sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/30-pdo_sqlsrv.ini && \
     echo extension=sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/20-sqlsrv.ini
 
+# Install Tidy
+RUN INSTALL_TIDY="rh-php73-php-tidy" && \
+    yum install -y --setopt=tsflags=nodocs $INSTALL_TIDY --nogpgcheck
+
 USER 1001
 
